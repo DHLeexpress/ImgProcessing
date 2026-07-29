@@ -1,15 +1,14 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -e
 
-ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-cd "$ROOT_DIR"
-
+VIDEO_PATH="$1"
+mkdir -p outputs
 python multi_video_motion_composite.py \
-  --clip examples/input/KakaoTalk_Video_2026-07-29-16-14-16.mp4 18 39 \
+  --clip "$VIDEO_PATH" 18 39 \
   --steps 16 \
   --forget 0.86 \
   --max-opacity 0.78 \
   --min-opacity 0.08 \
-  --output examples/output/reproduced_composite.png \
-  --save-background examples/output/reproduced_background.png \
-  --save-mask-preview examples/output/reproduced_mask_preview.png
+  --output outputs/drone_composite_18s_39s.png \
+  --save-background outputs/drone_estimated_background.png \
+  --save-mask-preview outputs/drone_mask_preview.png
